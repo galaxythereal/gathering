@@ -43,7 +43,7 @@ export const HARDCODED_SANTA_MATCHES: SecretSantaMatch[] = [
 export const HARDCODED_PHOTOS: Photo[] = [
   { 
     id: 'p1', 
-    url: 'https://images.unsplash.com/photo-1539635278303-d4002c07dee3?q=80&w=1000&auto=format&fit=crop', 
+    url: 'https://i.imghippo.com/files/mRJ5729bEY.jpeg', 
     caption: 'The last time we were all together!', 
     uploadedBy: 'Alex', 
     timestamp: Date.now(), 
@@ -51,7 +51,7 @@ export const HARDCODED_PHOTOS: Photo[] = [
   },
   { 
     id: 'p2', 
-    url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1000&auto=format&fit=crop', 
+    url: 'https://www.imghippo.com/i/wgam7629qQk.jpeg', 
     caption: 'Late night talks in 2021', 
     uploadedBy: 'Jordan', 
     timestamp: Date.now(), 
@@ -59,7 +59,7 @@ export const HARDCODED_PHOTOS: Photo[] = [
   },
   { 
     id: 'p3', 
-    url: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=1000&auto=format&fit=crop', 
+    url: 'https://www.imghippo.com/i/LnV2507Djs.jpeg', 
     caption: 'Ready for the reunion!', 
     uploadedBy: 'Admin', 
     timestamp: Date.now(), 
