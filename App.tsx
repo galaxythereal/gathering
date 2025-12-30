@@ -3,16 +3,13 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import Login from './components/Login';
 import SecretSanta from './components/SecretSanta';
-import ActivityPlanner from './components/ActivityPlanner';
 import Directory from './components/Directory';
-import Guestbook from './components/Guestbook';
 import Gallery from './components/Gallery';
 import Countdown from './components/Countdown';
-import MemoryLane from './components/MemoryLane';
-import { Friend, ActivityIdea, GuestbookEntry } from './types';
+import { Friend } from './types';
 import { DEFAULT_FRIENDS, HARDCODED_SANTA_MATCHES, HARDCODED_PHOTOS } from './constants';
 
-type Tab = 'santa' | 'activities' | 'directory' | 'memories' | 'guestbook' | 'gallery';
+type Tab = 'gallery' | 'santa' | 'directory';
 
 const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<Friend | null>(() => {
@@ -21,11 +18,6 @@ const App: React.FC = () => {
   });
 
   const [activeTab, setActiveTab] = useState<Tab>('gallery');
-
-  // For Guestbook and Activities, we still use local storage as "volatile" shared space 
-  // until you refresh, or you can hardcode these too if you wish.
-  const [activities, setActivities] = useState<ActivityIdea[]>([]);
-  const [guestbook, setGuestbook] = useState<GuestbookEntry[]>([]);
 
   const handleLogin = (friend: Friend) => {
     setCurrentUser(friend);
@@ -54,15 +46,12 @@ const App: React.FC = () => {
             {[
               { id: 'gallery', icon: '📸', label: 'Gallery' },
               { id: 'santa', icon: '🎁', label: 'Santa' },
-              { id: 'activities', icon: '🎈', label: 'Board' },
               { id: 'directory', icon: '👥', label: 'Gang' },
-              { id: 'memories', icon: '🕰️', label: 'Lane' },
-              { id: 'guestbook', icon: '✍️', label: 'Notes' },
             ].map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as Tab)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm transition-all whitespace-nowrap ${
+                className={`flex items-center gap-2 px-8 py-3 rounded-2xl font-bold text-sm transition-all whitespace-nowrap ${
                   activeTab === tab.id 
                   ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 scale-105' 
                   : 'text-gray-500 hover:text-indigo-600 hover:bg-white'
@@ -81,7 +70,7 @@ const App: React.FC = () => {
             <Gallery 
               currentUser={currentUser} 
               photos={HARDCODED_PHOTOS} 
-              onUpdate={() => {}} // Disabled for static mode
+              onUpdate={() => {}} 
             />
           )}
           {activeTab === 'santa' && (
@@ -89,33 +78,17 @@ const App: React.FC = () => {
               friends={DEFAULT_FRIENDS} 
               currentUser={currentUser} 
               matches={HARDCODED_SANTA_MATCHES}
-              onUpdate={() => {}} // Assignments are now hardcoded
-            />
-          )}
-          {activeTab === 'activities' && (
-            <ActivityPlanner 
-              friends={DEFAULT_FRIENDS} 
-              currentUser={currentUser} 
-              activities={activities}
-              onUpdate={setActivities}
+              onUpdate={() => {}} 
             />
           )}
           {activeTab === 'directory' && <Directory friends={DEFAULT_FRIENDS} />}
-          {activeTab === 'memories' && <MemoryLane />}
-          {activeTab === 'guestbook' && (
-            <Guestbook 
-              currentUser={currentUser} 
-              entries={guestbook}
-              onUpdate={setGuestbook}
-            />
-          )}
         </div>
 
         <section className="mt-40 py-20 border-t border-gray-100 text-center">
           <div className="max-w-2xl mx-auto">
             <h2 className="text-4xl font-serif text-indigo-900 mb-6 italic">Stay Gold.</h2>
             <p className="text-gray-400 leading-relaxed max-w-md mx-auto">
-              "Nothing gold can stay," Frost said. But ten friends reuniting after two years might just prove him wrong.
+              "Nothing gold can stay," Frost said. But friends reuniting after two years might just prove him wrong.
             </p>
           </div>
         </section>

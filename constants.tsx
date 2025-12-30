@@ -5,7 +5,6 @@ import { Friend, MemoryEntry, SecretSantaMatch, Photo } from './types';
  * 1. THE FRIENDS & PASSWORDS
  * Change "secretCode" to whatever you want their login PIN to be.
  */
-
 export const DEFAULT_FRIENDS: Friend[] = [
   {
     id: '1',
@@ -100,26 +99,24 @@ export const DEFAULT_FRIENDS: Friend[] = [
 ];
 
 /**
- * 2. SECRET SANTA ASSIGNMENTS
- * Hardcode who buys for whom here using their IDs (1 through 10).
- * Format: { giverId: 'ID_OF_BUYER', receiverId: 'ID_OF_RECIPIENT' }
+ * 2. SECRET SANTA ASSIGNMENTS (Configurable)
+ * Giver ID buys for Receiver ID.
  */
 export const HARDCODED_SANTA_MATCHES: SecretSantaMatch[] = [
-  { giverId: '1', receiverId: '1' },
-  { giverId: '2', receiverId: '2' },
-  { giverId: '3', receiverId: '3' },
-  { giverId: '4', receiverId: '4' },
-  { giverId: '5', receiverId: '5' },
-  { giverId: '6', receiverId: '6' },
-  { giverId: '7', receiverId: '7' },
-  { giverId: '8', receiverId: '8' },
-  { giverId: '9', receiverId: '9' },
-  { giverId: '10', receiverId: '10' },
+  { giverId: '1', receiverId: '2' },
+  { giverId: '2', receiverId: '3' },
+  { giverId: '3', receiverId: '4' },
+  { giverId: '4', receiverId: '5' },
+  { giverId: '5', receiverId: '6' },
+  { giverId: '6', receiverId: '7' },
+  { giverId: '7', receiverId: '8' },
+  { giverId: '8', receiverId: '9' },
+  { giverId: '9', receiverId: '10' },
+  { giverId: '10', receiverId: '1' },
 ];
 
 /**
- * 3. SHARED PHOTO GALLERY
- * Add your photo URLs here. These will be visible to everyone.
+ * 3. SHARED PHOTO GALLERY (Configurable)
  */
 export const HARDCODED_PHOTOS: Photo[] = [
   { 
@@ -148,11 +145,38 @@ export const HARDCODED_PHOTOS: Photo[] = [
   }
 ];
 
-export const MEMORY_TIMELINE: MemoryEntry[] = [
-  { id: 'm1', year: '2023', title: 'The Beginning', description: 'When we all .' },
-  { id: 'm2', year: '2023', title: 'Coast to Coast', description: 'Our .' },
-  { id: 'm3', year: '2024', title: 'The Last', description: 'Our last.' },
-  { id: 'm4', year: '2024', title: 'The', description: 'Keeping the spark alive through .' },
-];
+/**
+ * 4. REUNION DATE (Configurable)
+ * Set to Friday 1:30 PM CLT (Cairo Local Time is UTC+2)
+ */
+export const REUNION_DATE = new Date('2025-02-28T13:30:00+02:00').getTime();
 
-export const REUNION_DATE = new Date('2025-06-20T18:00:00').getTime();
+/**
+ * 5. MEMORY TIMELINE
+ */
+export const MEMORY_TIMELINE: MemoryEntry[] = [
+  {
+    id: 'm1',
+    year: '2022',
+    title: 'The Enactus Era',
+    description: 'When we all met and spent way too much time in the club room working on projects and drinking tea.'
+  },
+  {
+    id: 'm2',
+    year: '2023',
+    title: 'Graduation & Beyond',
+    description: 'Promises to stay in touch as we entered the real world. The first scattering of the group.'
+  },
+  {
+    id: 'm3',
+    year: '2024',
+    title: 'The Silent Year',
+    description: 'Life got busy, careers started, but the group chat never truly died. Memories kept us together.'
+  },
+  {
+    id: 'm4',
+    year: '2025',
+    title: 'The Grand Reunion',
+    description: 'Two years later, and here we are. Still us, still gold. Ready to make new memories.'
+  }
+];
