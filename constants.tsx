@@ -125,24 +125,24 @@ export const HARDCODED_PHOTOS: Photo[] = [
   { 
     id: 'p1', 
     url: 'https://i.imghippo.com/files/mRJ5729bEY.jpeg', 
-    caption: 'The last time we were all together!', 
-    uploadedBy: 'Alex', 
+    caption: 'Iftar Ramadan 24', 
+    uploadedBy: 'Ezzat', 
     timestamp: Date.now(), 
     rotation: '-2deg' 
   },
   { 
     id: 'p2', 
-    url: 'https://www.imghippo.com/files/wgam7629qQk.jpeg', 
-    caption: 'Late night talks in 2021', 
-    uploadedBy: 'Jordan', 
+    url: 'https://i.imghippo.com/files/wgam7629qQk.jpeg', 
+    caption: 'Hehe', 
+    uploadedBy: 'Ezzat', 
     timestamp: Date.now(), 
     rotation: '3deg' 
   },
   { 
     id: 'p3', 
-    url: 'https://www.imghippo.com/files/LnV2507Djs.jpeg', 
-    caption: 'Ready for the reunion!', 
-    uploadedBy: 'Admin', 
+    url: 'https://i.imghippo.com/files/LnV2507Djs.jpeg', 
+    caption: 'Last time together', 
+    uploadedBy: 'Ezzat', 
     timestamp: Date.now(), 
     rotation: '1deg' 
   }
@@ -151,8 +151,8 @@ export const HARDCODED_PHOTOS: Photo[] = [
 export const MEMORY_TIMELINE: MemoryEntry[] = [
   { id: 'm1', year: '2023', title: 'The Beginning', description: 'When we all .' },
   { id: 'm2', year: '2023', title: 'Coast to Coast', description: 'Our .' },
-  { id: 'm3', year: '2024', title: 'The Last Hug', description: 'Our last.' },
-  { id: 'm4', year: '2024', title: 'The Zoom Era', description: 'Keeping the spark alive through .' },
+  { id: 'm3', year: '2024', title: 'The Last', description: 'Our last.' },
+  { id: 'm4', year: '2024', title: 'The', description: 'Keeping the spark alive through .' },
 ];
 
 export const REUNION_DATE = new Date('2025-06-20T18:00:00').getTime();
