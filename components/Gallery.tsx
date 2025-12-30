@@ -43,10 +43,7 @@ const Gallery: React.FC<Props> = ({ photos }) => {
           </div>
         ))}
       </div>
-      
-      <div className="mt-20 p-10 bg-indigo-50/50 rounded-[3rem] text-center border border-indigo-100">
-        <p className="text-indigo-400 font-bold italic">Want to add more photos? Just drop them into `constants.tsx`!</p>
-      </div>
+
     </div>
   );
 };
