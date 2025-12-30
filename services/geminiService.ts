@@ -2,9 +2,8 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { Friend, ActivityIdea } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 export async function generateActivities(friends: Friend[]): Promise<ActivityIdea[]> {
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   const bios = friends.map(f => `${f.name}: ${f.bio}`).join('\n');
   const prompt = `We are a group of 10 friends reuniting after 2 years. Here are our mini bios:\n${bios}\n\nSuggest 5 unique and fun gathering activities that would suit this specific group. Include a title, short description, duration, and vibes (e.g. "Chill", "Competitive").`;
 
@@ -41,6 +40,7 @@ export async function generateActivities(friends: Friend[]): Promise<ActivityIde
 }
 
 export async function generateGiftIdeas(giver: Friend, receiver: Friend): Promise<string[]> {
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   const prompt = `Secret Santa Time! ${giver.name} is buying a gift for ${receiver.name}. 
   About ${receiver.name}: ${receiver.bio}. 
   Suggest 3 thoughtful, creative gift ideas under $50 based on their bio. Be specific and fun.`;
