@@ -31,7 +31,7 @@ const ActivityPlanner: React.FC<Props> = ({ friends, currentUser }) => {
       suggestedBy: 'Gemini AI',
       timestamp: Date.now()
     }));
-    setActivities([...formatted, ...activities]);
+    setActivities(prev => [...formatted, ...prev]);
     setLoading(false);
   };
 
@@ -49,33 +49,35 @@ const ActivityPlanner: React.FC<Props> = ({ friends, currentUser }) => {
       timestamp: Date.now()
     };
 
-    setActivities([activity, ...activities]);
+    setActivities(prev => [activity, ...prev]);
     setNewAct({ title: '', description: '', duration: '', vibes: '' });
     setShowForm(false);
   };
 
   const removeActivity = (id: string) => {
-    setActivities(activities.filter(a => a.id !== id));
+    if (window.confirm('Remove this activity from the board?')) {
+      setActivities(prev => prev.filter(a => a.id !== id));
+    }
   };
 
   return (
     <div className="mt-12">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
         <div>
-          <h2 className="text-4xl font-serif text-indigo-900">Gathering Board</h2>
-          <p className="text-gray-600 italic">Everyone contributes to the weekend vibe.</p>
+          <h2 className="text-4xl font-serif text-indigo-900">Activity Suggestions</h2>
+          <p className="text-gray-600 italic">Add your ideas or let AI brainstorm for us.</p>
         </div>
         <div className="flex gap-2 w-full md:w-auto">
           <button 
             onClick={() => setShowForm(!showForm)}
             className="flex-1 md:flex-none bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-2xl shadow-lg transition-all"
           >
-            {showForm ? 'Close' : '✍️ Suggest Activity'}
+            {showForm ? 'Cancel' : '✍️ Propose Idea'}
           </button>
           <button 
             onClick={handleAISuggest}
             disabled={loading}
-            className="flex-1 md:flex-none bg-white/50 hover:bg-white text-indigo-600 font-bold py-3 px-6 rounded-2xl border border-indigo-100 transition-all shadow-sm"
+            className="flex-1 md:flex-none bg-white/50 hover:bg-white text-indigo-600 font-bold py-3 px-6 rounded-2xl border border-indigo-100 transition-all shadow-sm disabled:opacity-50"
           >
             {loading ? 'Thinking...' : '🤖 Ask Gemini'}
           </button>
@@ -92,40 +94,31 @@ const ActivityPlanner: React.FC<Props> = ({ friends, currentUser }) => {
                 value={newAct.title}
                 onChange={e => setNewAct({...newAct, title: e.target.value})}
                 className="w-full bg-indigo-50 rounded-xl p-4 focus:ring-2 ring-indigo-200 outline-none"
-                placeholder="e.g. Backyard Stargazing"
+                placeholder="e.g. 2 AM Taco Run"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-indigo-300 uppercase mb-2 ml-1">Vibes (comma separated)</label>
+              <label className="block text-xs font-bold text-indigo-300 uppercase mb-2 ml-1">Vibes (e.g. Chaos, Late Night)</label>
               <input 
                 value={newAct.vibes}
                 onChange={e => setNewAct({...newAct, vibes: e.target.value})}
                 className="w-full bg-indigo-50 rounded-xl p-4 focus:ring-2 ring-indigo-200 outline-none"
-                placeholder="Chill, Night, Wine"
+                placeholder="Comma separated tags..."
               />
             </div>
             <div className="md:col-span-2">
-              <label className="block text-xs font-bold text-indigo-300 uppercase mb-2 ml-1">Description</label>
+              <label className="block text-xs font-bold text-indigo-300 uppercase mb-2 ml-1">The Plan</label>
               <textarea 
                 value={newAct.description}
                 onChange={e => setNewAct({...newAct, description: e.target.value})}
                 className="w-full bg-indigo-50 rounded-xl p-4 h-24 focus:ring-2 ring-indigo-200 outline-none resize-none"
-                placeholder="Tell us more about it..."
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-indigo-300 uppercase mb-2 ml-1">Expected Duration</label>
-              <input 
-                value={newAct.duration}
-                onChange={e => setNewAct({...newAct, duration: e.target.value})}
-                className="w-full bg-indigo-50 rounded-xl p-4 focus:ring-2 ring-indigo-200 outline-none"
-                placeholder="2-3 Hours"
+                placeholder="Explain the idea..."
               />
             </div>
           </div>
           <div className="mt-8 flex justify-end">
             <button className="bg-indigo-600 text-white font-bold py-3 px-10 rounded-2xl shadow-lg hover:bg-indigo-700 transition-all">
-              Post to Group
+              Add to Board
             </button>
           </div>
         </form>
@@ -133,8 +126,8 @@ const ActivityPlanner: React.FC<Props> = ({ friends, currentUser }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {activities.length === 0 && !loading && (
-          <div className="col-span-full py-20 text-center text-gray-400 italic">
-            No activities yet. Start suggesting!
+          <div className="col-span-full py-20 text-center text-gray-400 border-2 border-dashed border-indigo-100 rounded-[3rem] italic">
+            Board is empty. Suggest the first adventure!
           </div>
         )}
         
@@ -142,14 +135,16 @@ const ActivityPlanner: React.FC<Props> = ({ friends, currentUser }) => {
           <div key={act.id} className="bg-white p-8 rounded-[2rem] shadow-lg border border-indigo-50 hover:shadow-xl transition-all group relative">
             <div className="flex justify-between items-start mb-6">
               <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-400 bg-indigo-50 px-3 py-1 rounded-full">
-                {act.duration}
+                {act.duration || 'Flexible'}
               </span>
-              <button 
-                onClick={() => removeActivity(act.id)}
-                className="opacity-0 group-hover:opacity-100 text-gray-300 hover:text-rose-500 transition-all text-xs"
-              >
-                Remove
-              </button>
+              {(act.suggestedBy === currentUser.name || act.suggestedBy === 'Gemini AI') && (
+                <button 
+                  onClick={() => removeActivity(act.id)}
+                  className="opacity-0 group-hover:opacity-100 text-gray-300 hover:text-rose-500 transition-all text-xs font-bold"
+                >
+                  DELETE
+                </button>
+              )}
             </div>
             <h3 className="text-2xl font-bold text-indigo-950 mb-4">{act.title}</h3>
             <p className="text-gray-600 text-sm leading-relaxed mb-6 italic">"{act.description}"</p>

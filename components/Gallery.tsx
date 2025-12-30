@@ -46,12 +46,12 @@ const Gallery: React.FC<Props> = ({ currentUser }) => {
       const newPhoto: Photo = {
         id: Math.random().toString(36).substr(2, 9),
         url: reader.result as string,
-        caption: caption || 'No caption',
+        caption: caption || 'Captured Moment',
         uploadedBy: currentUser.name,
         timestamp: Date.now(),
-        rotation: `${(Math.random() * 10 - 5).toFixed(1)}deg`
+        rotation: `${(Math.random() * 8 - 4).toFixed(1)}deg`
       };
-      setPhotos([newPhoto, ...photos]);
+      setPhotos(prev => [newPhoto, ...prev]);
       setCaption('');
       setIsUploading(false);
     };
@@ -61,12 +61,12 @@ const Gallery: React.FC<Props> = ({ currentUser }) => {
   return (
     <div className="py-12">
       <div className="flex justify-between items-center mb-12 px-4">
-        <h2 className="text-3xl font-serif text-indigo-900">Captured Moments</h2>
+        <h2 className="text-3xl font-serif text-indigo-900">The Gallery</h2>
         <button 
           onClick={() => setIsUploading(!isUploading)}
           className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-2xl shadow-lg transition-all flex items-center gap-2"
         >
-          {isUploading ? 'Cancel' : '📸 Add Photo'}
+          {isUploading ? 'Cancel' : '📸 Upload Memory'}
         </button>
       </div>
 
@@ -80,7 +80,8 @@ const Gallery: React.FC<Props> = ({ currentUser }) => {
             className="w-full p-4 mb-4 rounded-xl bg-indigo-50 border-none focus:ring-2 ring-indigo-200 outline-none text-gray-800"
           />
           <label className="block w-full text-center p-8 border-2 border-dashed border-indigo-200 rounded-2xl cursor-pointer hover:bg-indigo-50 transition-colors">
-            <span className="text-indigo-400 font-bold">Choose File</span>
+            <span className="text-indigo-400 font-bold block mb-1">Select Image</span>
+            <span className="text-[10px] text-gray-400">JPG, PNG, WebP supported</span>
             <input type="file" className="hidden" accept="image/*" onChange={handleFileUpload} />
           </label>
         </div>
@@ -90,10 +91,10 @@ const Gallery: React.FC<Props> = ({ currentUser }) => {
         {photos.map((photo) => (
           <div 
             key={photo.id} 
-            className="bg-white p-3 pb-10 shadow-xl rounded-sm transform transition-all hover:scale-105 hover:z-20 cursor-pointer group"
+            className="bg-white p-3 pb-12 shadow-xl rounded-sm transform transition-all hover:scale-105 hover:z-20 cursor-pointer group"
             style={{ transform: `rotate(${photo.rotation})` }}
           >
-            <div className="relative overflow-hidden w-56 h-56">
+            <div className="relative overflow-hidden w-56 h-56 bg-gray-100">
               <img 
                 src={photo.url} 
                 alt={photo.caption} 
@@ -103,7 +104,7 @@ const Gallery: React.FC<Props> = ({ currentUser }) => {
             <div className="mt-4 px-2 max-w-[224px]">
               <p className="text-sm text-indigo-900 font-bold truncate">{photo.caption}</p>
               <div className="flex justify-between mt-2">
-                <p className="text-[10px] text-gray-400 uppercase tracking-widest">{photo.uploadedBy}</p>
+                <p className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">{photo.uploadedBy}</p>
                 <p className="text-[10px] text-gray-400">{new Date(photo.timestamp).toLocaleDateString()}</p>
               </div>
             </div>
