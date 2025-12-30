@@ -103,16 +103,16 @@ export const DEFAULT_FRIENDS: Friend[] = [
  * Giver ID buys for Receiver ID.
  */
 export const HARDCODED_SANTA_MATCHES: SecretSantaMatch[] = [
-  { giverId: '1', receiverId: '2' },
-  { giverId: '2', receiverId: '3' },
-  { giverId: '3', receiverId: '4' },
-  { giverId: '4', receiverId: '5' },
-  { giverId: '5', receiverId: '6' },
-  { giverId: '6', receiverId: '7' },
-  { giverId: '7', receiverId: '8' },
-  { giverId: '8', receiverId: '9' },
-  { giverId: '9', receiverId: '10' },
-  { giverId: '10', receiverId: '1' },
+  { giverId: '1', receiverId: '1' },
+  { giverId: '2', receiverId: '2' },
+  { giverId: '3', receiverId: '3' },
+  { giverId: '4', receiverId: '4' },
+  { giverId: '5', receiverId: '5' },
+  { giverId: '6', receiverId: '6' },
+  { giverId: '7', receiverId: '7' },
+  { giverId: '8', receiverId: '8' },
+  { giverId: '9', receiverId: '9' },
+  { giverId: '10', receiverId: '10' },
 ];
 
 /**
