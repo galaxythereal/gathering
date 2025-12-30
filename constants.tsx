@@ -1,6 +1,10 @@
 
-import { Friend, MemoryEntry } from './types';
+import { Friend, MemoryEntry, SecretSantaMatch, Photo } from './types';
 
+/**
+ * 1. THE FRIENDS & PASSWORDS
+ * Change "secretCode" to whatever you want their login PIN to be.
+ */
 export const DEFAULT_FRIENDS: Friend[] = [
   { id: '1', name: 'Alex', nickname: 'Al', bio: 'Loves spicy food and hiking.', secretCode: '1234', howWeMet: 'High School Chem Lab', bestMemory: 'The 2018 road trip' },
   { id: '2', name: 'Jamie', nickname: 'Jay', bio: 'Board game fanatic and dog lover.', secretCode: '2222', howWeMet: 'Summer Camp', bestMemory: 'Winning the trivia night' },
@@ -12,6 +16,55 @@ export const DEFAULT_FRIENDS: Friend[] = [
   { id: '8', name: 'Riley', nickname: 'Riles', bio: 'Life of the party, master of karaoke.', secretCode: '8888', howWeMet: 'Open Mic Night', bestMemory: 'The Queen tribute performance' },
   { id: '9', name: 'Quinn', nickname: 'Q', bio: 'Expert at finding hidden bars.', secretCode: '9999', howWeMet: 'First Job Together', bestMemory: 'The 3 AM diner run' },
   { id: '10', name: 'Robin', nickname: 'Birdie', bio: 'Calm, collected, and a pro at yoga.', secretCode: '1010', howWeMet: 'Yoga Retreat', bestMemory: 'Morning meditation on the beach' }
+];
+
+/**
+ * 2. SECRET SANTA ASSIGNMENTS
+ * Hardcode who buys for whom here using their IDs (1 through 10).
+ * Format: { giverId: 'ID_OF_BUYER', receiverId: 'ID_OF_RECIPIENT' }
+ */
+export const HARDCODED_SANTA_MATCHES: SecretSantaMatch[] = [
+  { giverId: '1', receiverId: '2' },
+  { giverId: '2', receiverId: '3' },
+  { giverId: '3', receiverId: '4' },
+  { giverId: '4', receiverId: '5' },
+  { giverId: '5', receiverId: '6' },
+  { giverId: '6', receiverId: '7' },
+  { giverId: '7', receiverId: '8' },
+  { giverId: '8', receiverId: '9' },
+  { giverId: '9', receiverId: '10' },
+  { giverId: '10', receiverId: '1' },
+];
+
+/**
+ * 3. SHARED PHOTO GALLERY
+ * Add your photo URLs here. These will be visible to everyone.
+ */
+export const HARDCODED_PHOTOS: Photo[] = [
+  { 
+    id: 'p1', 
+    url: 'https://images.unsplash.com/photo-1539635278303-d4002c07dee3?q=80&w=1000&auto=format&fit=crop', 
+    caption: 'The last time we were all together!', 
+    uploadedBy: 'Alex', 
+    timestamp: Date.now(), 
+    rotation: '-2deg' 
+  },
+  { 
+    id: 'p2', 
+    url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1000&auto=format&fit=crop', 
+    caption: 'Late night talks in 2021', 
+    uploadedBy: 'Jordan', 
+    timestamp: Date.now(), 
+    rotation: '3deg' 
+  },
+  { 
+    id: 'p3', 
+    url: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=1000&auto=format&fit=crop', 
+    caption: 'Ready for the reunion!', 
+    uploadedBy: 'Admin', 
+    timestamp: Date.now(), 
+    rotation: '1deg' 
+  }
 ];
 
 export const MEMORY_TIMELINE: MemoryEntry[] = [

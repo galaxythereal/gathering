@@ -10,7 +10,7 @@ interface Props {
   onUpdate: (matches: SecretSantaMatch[]) => void;
 }
 
-const SecretSanta: React.FC<Props> = ({ friends, currentUser, matches, onUpdate }) => {
+const SecretSanta: React.FC<Props> = ({ friends, currentUser, matches }) => {
   const [giftIdeas, setGiftIdeas] = useState<string[]>([]);
   const [isLoadingGifts, setIsLoadingGifts] = useState(false);
 
@@ -31,57 +31,18 @@ const SecretSanta: React.FC<Props> = ({ friends, currentUser, matches, onUpdate 
     setIsLoadingGifts(false);
   };
 
-  const performDraw = () => {
-    if (matches.length > 0) return;
-    
-    const attemptDraw = () => {
-      let givers = [...friends];
-      let receivers = [...friends];
-      let result: SecretSantaMatch[] = [];
-
-      for (let giver of givers) {
-        let validReceivers = receivers.filter(r => r.id !== giver.id);
-        if (validReceivers.length === 0) return null;
-        let randomIndex = Math.floor(Math.random() * validReceivers.length);
-        let receiver = validReceivers[randomIndex];
-        result.push({ giverId: giver.id, receiverId: receiver.id });
-        receivers = receivers.filter(r => r.id !== receiver.id);
-      }
-      return result;
-    };
-
-    let drawResult = null;
-    let attempts = 0;
-    while (!drawResult && attempts < 100) {
-      drawResult = attemptDraw();
-      attempts++;
-    }
-
-    if (drawResult) {
-      onUpdate(drawResult);
-    }
-  };
-
   return (
-    <div className="bg-white/40 p-10 rounded-[3rem] shadow-xl backdrop-blur-md border border-white/20">
+    <div className="bg-white/40 p-10 rounded-[3rem] shadow-xl backdrop-blur-md border border-white/20 animate-fade-in">
       <div className="flex justify-between items-start mb-10">
         <div>
           <h2 className="text-4xl font-serif text-indigo-900 mb-2">Secret Santa</h2>
-          <p className="text-gray-500 italic">Your mission, {currentUser.name}, should you choose to accept it...</p>
+          <p className="text-gray-500 italic">Assignments are fixed. Here is your target, {currentUser.name}:</p>
         </div>
-        {matches.length === 0 && (
-          <button 
-            onClick={performDraw}
-            className="bg-rose-500 hover:bg-rose-600 text-white px-8 py-3 rounded-2xl font-bold text-sm shadow-lg transition-all"
-          >
-            Admin: Start Global Draw
-          </button>
-        )}
       </div>
       
-      {matches.length === 0 ? (
+      {!target ? (
         <div className="text-center py-20 bg-white/20 rounded-[2rem] border border-dashed border-indigo-200">
-          <p className="text-indigo-400 font-bold italic">The draw hasn't happened yet. Check back soon!</p>
+          <p className="text-indigo-400 font-bold italic text-xl">You haven't been assigned a person in the config.</p>
         </div>
       ) : (
         <div className="flex flex-col md:flex-row gap-12 items-center">
