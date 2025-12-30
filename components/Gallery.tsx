@@ -1,41 +1,16 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Photo, Friend } from '../types';
 
 interface Props {
   currentUser: Friend;
+  photos: Photo[];
+  onUpdate: (photos: Photo[]) => void;
 }
 
-const Gallery: React.FC<Props> = ({ currentUser }) => {
-  const [photos, setPhotos] = useState<Photo[]>(() => {
-    const saved = localStorage.getItem('reunion_gallery');
-    if (saved) return JSON.parse(saved);
-    return [
-      { 
-        id: '1', 
-        url: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=800', 
-        caption: 'Where the journey began.', 
-        uploadedBy: 'Admin', 
-        timestamp: Date.now() - 31536000000, 
-        rotation: '-2deg' 
-      },
-      { 
-        id: '2', 
-        url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=800', 
-        caption: 'Late nights, better stories.', 
-        uploadedBy: 'Admin', 
-        timestamp: Date.now() - 15768000000, 
-        rotation: '3deg' 
-      }
-    ];
-  });
-
+const Gallery: React.FC<Props> = ({ currentUser, photos, onUpdate }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [caption, setCaption] = useState('');
-
-  useEffect(() => {
-    localStorage.setItem('reunion_gallery', JSON.stringify(photos));
-  }, [photos]);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -51,11 +26,17 @@ const Gallery: React.FC<Props> = ({ currentUser }) => {
         timestamp: Date.now(),
         rotation: `${(Math.random() * 8 - 4).toFixed(1)}deg`
       };
-      setPhotos(prev => [newPhoto, ...prev]);
+      onUpdate([newPhoto, ...photos]);
       setCaption('');
       setIsUploading(false);
     };
     reader.readAsDataURL(file);
+  };
+
+  const removePhoto = (id: string) => {
+    if (window.confirm('Delete this photo for everyone?')) {
+      onUpdate(photos.filter(p => p.id !== id));
+    }
   };
 
   return (
@@ -63,7 +44,7 @@ const Gallery: React.FC<Props> = ({ currentUser }) => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
         <div>
           <h2 className="text-4xl font-serif text-indigo-950">Group Memories</h2>
-          <p className="text-gray-500 italic mt-1">Photos from the past 2 years and the gathering itself.</p>
+          <p className="text-gray-500 italic mt-1">Shared by everyone in the cloud.</p>
         </div>
         <button 
           onClick={() => setIsUploading(!isUploading)}
@@ -100,6 +81,9 @@ const Gallery: React.FC<Props> = ({ currentUser }) => {
       )}
 
       <div className="flex justify-center gap-10 py-10 flex-wrap">
+        {photos.length === 0 && (
+          <div className="text-center py-20 text-gray-400 italic">No photos yet. Be the first to upload!</div>
+        )}
         {photos.map((photo) => (
           <div 
             key={photo.id} 
@@ -112,6 +96,12 @@ const Gallery: React.FC<Props> = ({ currentUser }) => {
                 alt={photo.caption} 
                 className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
               />
+              <button 
+                onClick={(e) => { e.stopPropagation(); removePhoto(photo.id); }}
+                className="absolute top-2 right-2 bg-rose-500 text-white w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+              >
+                ✕
+              </button>
             </div>
             <div className="mt-5 px-1">
               <p className="text-lg text-indigo-950 font-serif italic mb-1 truncate">{photo.caption}</p>

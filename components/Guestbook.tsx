@@ -1,26 +1,16 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Friend, GuestbookEntry } from '../types';
 
 interface Props {
   currentUser: Friend;
+  entries: GuestbookEntry[];
+  onUpdate: (entries: GuestbookEntry[]) => void;
 }
 
-const Guestbook: React.FC<Props> = ({ currentUser }) => {
-  const [entries, setEntries] = useState<GuestbookEntry[]>(() => {
-    const saved = localStorage.getItem('reunion_guestbook');
-    return saved ? JSON.parse(saved) : [
-      { id: '1', authorId: '8', authorName: 'Riley', text: "Ready to dominate at karaoke! 🎤", timestamp: Date.now() - 86400000 },
-      { id: '2', authorId: '3', authorName: 'Sam', text: "Can't wait to see your faces again! 🥂", timestamp: Date.now() - 43200000 }
-    ];
-  });
-  
+const Guestbook: React.FC<Props> = ({ currentUser, entries, onUpdate }) => {
   const [activeCategory, setActiveCategory] = useState<'hype' | 'thanks'>('hype');
   const [newMsg, setNewMsg] = useState('');
-
-  useEffect(() => {
-    localStorage.setItem('reunion_guestbook', JSON.stringify(entries));
-  }, [entries]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +24,7 @@ const Guestbook: React.FC<Props> = ({ currentUser }) => {
       timestamp: Date.now()
     };
 
-    setEntries([entry, ...entries]);
+    onUpdate([entry, ...entries]);
     setNewMsg('');
   };
 
@@ -42,7 +32,7 @@ const Guestbook: React.FC<Props> = ({ currentUser }) => {
     <div className="py-12 max-w-4xl mx-auto px-4 animate-fade-in">
       <div className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-serif text-indigo-950 mb-4">Message Board</h2>
-        <p className="text-gray-500 italic max-w-md mx-auto">Leave a note for the gang to read whenever they drop by.</p>
+        <p className="text-gray-500 italic max-w-md mx-auto">Shared notes with the gang.</p>
       </div>
 
       <div className="flex justify-center gap-4 mb-10">

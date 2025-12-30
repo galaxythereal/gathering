@@ -6,13 +6,11 @@ import { generateGiftIdeas } from '../services/geminiService';
 interface Props {
   friends: Friend[];
   currentUser: Friend;
+  matches: SecretSantaMatch[];
+  onUpdate: (matches: SecretSantaMatch[]) => void;
 }
 
-const SecretSanta: React.FC<Props> = ({ friends, currentUser }) => {
-  const [matches, setMatches] = useState<SecretSantaMatch[]>(() => {
-    const saved = localStorage.getItem('reunion_santa_matches');
-    return saved ? JSON.parse(saved) : [];
-  });
+const SecretSanta: React.FC<Props> = ({ friends, currentUser, matches, onUpdate }) => {
   const [giftIdeas, setGiftIdeas] = useState<string[]>([]);
   const [isLoadingGifts, setIsLoadingGifts] = useState(false);
 
@@ -60,8 +58,7 @@ const SecretSanta: React.FC<Props> = ({ friends, currentUser }) => {
     }
 
     if (drawResult) {
-      setMatches(drawResult);
-      localStorage.setItem('reunion_santa_matches', JSON.stringify(drawResult));
+      onUpdate(drawResult);
     }
   };
 
@@ -75,9 +72,9 @@ const SecretSanta: React.FC<Props> = ({ friends, currentUser }) => {
         {matches.length === 0 && (
           <button 
             onClick={performDraw}
-            className="bg-rose-500 text-white px-6 py-2 rounded-xl font-bold text-sm"
+            className="bg-rose-500 hover:bg-rose-600 text-white px-8 py-3 rounded-2xl font-bold text-sm shadow-lg transition-all"
           >
-            Admin: Start Draw
+            Admin: Start Global Draw
           </button>
         )}
       </div>

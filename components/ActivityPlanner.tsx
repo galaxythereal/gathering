@@ -1,26 +1,19 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Friend, ActivityIdea } from '../types';
 import { generateActivities } from '../services/geminiService';
 
 interface Props {
   friends: Friend[];
   currentUser: Friend;
+  activities: ActivityIdea[];
+  onUpdate: (activities: ActivityIdea[]) => void;
 }
 
-const ActivityPlanner: React.FC<Props> = ({ friends, currentUser }) => {
-  const [activities, setActivities] = useState<ActivityIdea[]>(() => {
-    const saved = localStorage.getItem('reunion_activities');
-    return saved ? JSON.parse(saved) : [];
-  });
-  
+const ActivityPlanner: React.FC<Props> = ({ friends, currentUser, activities, onUpdate }) => {
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [newAct, setNewAct] = useState({ title: '', description: '', duration: '', vibes: '' });
-
-  useEffect(() => {
-    localStorage.setItem('reunion_activities', JSON.stringify(activities));
-  }, [activities]);
 
   const handleAISuggest = async () => {
     setLoading(true);
@@ -31,7 +24,7 @@ const ActivityPlanner: React.FC<Props> = ({ friends, currentUser }) => {
       suggestedBy: 'Gemini AI',
       timestamp: Date.now()
     }));
-    setActivities(prev => [...formatted, ...prev]);
+    onUpdate([...formatted, ...activities]);
     setLoading(false);
   };
 
@@ -49,14 +42,14 @@ const ActivityPlanner: React.FC<Props> = ({ friends, currentUser }) => {
       timestamp: Date.now()
     };
 
-    setActivities(prev => [activity, ...prev]);
+    onUpdate([activity, ...activities]);
     setNewAct({ title: '', description: '', duration: '', vibes: '' });
     setShowForm(false);
   };
 
   const removeActivity = (id: string) => {
-    if (window.confirm('Remove this activity from the board?')) {
-      setActivities(prev => prev.filter(a => a.id !== id));
+    if (window.confirm('Remove this activity from the board for everyone?')) {
+      onUpdate(activities.filter(a => a.id !== id));
     }
   };
 
@@ -65,7 +58,7 @@ const ActivityPlanner: React.FC<Props> = ({ friends, currentUser }) => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
         <div>
           <h2 className="text-4xl font-serif text-indigo-900">Activity Suggestions</h2>
-          <p className="text-gray-600 italic">Add your ideas or let AI brainstorm for us.</p>
+          <p className="text-gray-600 italic">Cloud-synced ideas for our group.</p>
         </div>
         <div className="flex gap-2 w-full md:w-auto">
           <button 
@@ -137,14 +130,12 @@ const ActivityPlanner: React.FC<Props> = ({ friends, currentUser }) => {
               <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-400 bg-indigo-50 px-3 py-1 rounded-full">
                 {act.duration || 'Flexible'}
               </span>
-              {(act.suggestedBy === currentUser.name || act.suggestedBy === 'Gemini AI') && (
-                <button 
-                  onClick={() => removeActivity(act.id)}
-                  className="opacity-0 group-hover:opacity-100 text-gray-300 hover:text-rose-500 transition-all text-xs font-bold"
-                >
-                  DELETE
-                </button>
-              )}
+              <button 
+                onClick={() => removeActivity(act.id)}
+                className="opacity-0 group-hover:opacity-100 text-gray-300 hover:text-rose-500 transition-all text-xs font-bold"
+              >
+                DELETE
+              </button>
             </div>
             <h3 className="text-2xl font-bold text-indigo-950 mb-4">{act.title}</h3>
             <p className="text-gray-600 text-sm leading-relaxed mb-6 italic">"{act.description}"</p>

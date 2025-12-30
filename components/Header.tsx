@@ -3,9 +3,11 @@ import React from 'react';
 
 interface Props {
   onLogout: () => void;
+  isSyncing: boolean;
+  isConnected: boolean;
 }
 
-const Header: React.FC<Props> = ({ onLogout }) => {
+const Header: React.FC<Props> = ({ onLogout, isSyncing, isConnected }) => {
   return (
     <header className="pt-8 px-4">
       <div className="max-w-7xl mx-auto flex justify-between items-center bg-white/40 backdrop-blur-md rounded-[2rem] p-4 pl-8 border border-white/40 shadow-sm">
@@ -13,7 +15,14 @@ const Header: React.FC<Props> = ({ onLogout }) => {
           <div className="text-2xl">🥂</div>
           <div>
             <h1 className="text-xl font-bold text-gray-900 tracking-tight">The Grand Reunion <span className="text-indigo-600">'25</span></h1>
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">Friends for Eternity</p>
+            <div className="flex items-center gap-2">
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">Friends for Eternity</p>
+              {isConnected && (
+                <span className={`text-[8px] font-bold px-2 py-0.5 rounded-full ${isSyncing ? 'bg-amber-100 text-amber-600 animate-pulse' : 'bg-green-100 text-green-600'}`}>
+                  {isSyncing ? 'SYNCING' : 'CLOUD LIVE'}
+                </span>
+              )}
+            </div>
           </div>
         </div>
 
