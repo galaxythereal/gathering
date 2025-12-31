@@ -1,16 +1,14 @@
-
-import React, { useState } from 'export React';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import Login from './components/Login';
 import SecretSanta from './components/SecretSanta';
 import Directory from './components/Directory';
 import Gallery from './components/Gallery';
 import Countdown from './components/Countdown';
-import MemoryLane from './components/MemoryLane';
 import { Friend } from './types';
 import { DEFAULT_FRIENDS, HARDCODED_SANTA_MATCHES, HARDCODED_PHOTOS } from './constants';
 
-type Tab = 'gallery' | 'timeline' | 'santa' | 'directory';
+type Tab = 'gallery' | 'santa' | 'directory';
 
 const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<Friend | null>(() => {
@@ -46,7 +44,6 @@ const App: React.FC = () => {
           <div className="bg-white/70 backdrop-blur-xl p-2 rounded-3xl border border-white shadow-xl flex gap-1 overflow-x-auto no-scrollbar max-w-full">
             {[
               { id: 'gallery', icon: '📸', label: 'Gallery' },
-              { id: 'timeline', icon: '🕰️', label: 'Timeline' },
               { id: 'santa', icon: '🎁', label: 'Santa' },
               { id: 'directory', icon: '👥', label: 'Gang' },
             ].map((tab) => (
@@ -75,7 +72,6 @@ const App: React.FC = () => {
               onUpdate={() => {}} 
             />
           )}
-          {activeTab === 'timeline' && <MemoryLane />}
           {activeTab === 'santa' && (
             <SecretSanta 
               friends={DEFAULT_FRIENDS} 
