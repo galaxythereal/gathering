@@ -1,122 +1,49 @@
 
-import { Friend, MemoryEntry, SecretSantaMatch, Photo } from './types';
+import { Friend, SecretSantaMatch, Photo, MemoryEntry } from './types';
 
 /**
  * 1. THE FRIENDS & PASSWORDS
- * Change "secretCode" to whatever you want their login PIN to be.
+ * 10 Friends with hard-to-guess random 4-digit codes.
  */
 export const DEFAULT_FRIENDS: Friend[] = [
-  {
-    id: '1',
-    name: 'Mahmoud',
-    nickname: 'Ezzat',
-    bio: 'The guy who somehow ends up responsible for everything.',
-    secretCode: '1234',
-    howWeMet: 'Enactus Menoufia',
-    bestMemory: 'nothing'
-  },
-  {
-    id: '2',
-    name: 'Hamed',
-    nickname: 'Hamed',
-    bio: 'If Hamed says he’ll do it, consider it already done.',
-    secretCode: '2222',
-    howWeMet: 'Enactus Menoufia',
-    bestMemory: 'Meeting Mahmoud Ezzat (life changed forever)'
-  },
-  {
-    id: '3',
-    name: 'Ahmed',
-    nickname: 'Gamal',
-    bio: 'Always down to try new food—even if it looks suspicious or smells dangerous.',
-    secretCode: '3333',
-    howWeMet: 'Enactus Menoufia',
-    bestMemory: 'Meeting Mahmoud Ezzat (life changed forever)'
-  },
-  {
-    id: '4',
-    name: 'Nayera',
-    nickname: 'Nayera',
-    bio: 'Quietly gets things done and somehow keeps the chaos under control.',
-    secretCode: '4444',
-    howWeMet: 'Enactus Menoufia',
-    bestMemory: 'Meeting Mahmoud Ezzat (life changed forever)'
-  },
-  {
-    id: '5',
-    name: 'Shahd',
-    nickname: 'Shahad',
-    bio: 'Always knows what’s trending before it’s trending.',
-    secretCode: '5555',
-    howWeMet: 'Enactus Menoufia',
-    bestMemory: 'Meeting Mahmoud Ezzat (life changed forever)'
-  },
-  {
-    id: '6',
-    name: 'Fatma',
-    nickname: 'Fatma',
-    bio: 'Calm, peaceful, and smart—the human version of “don’t worry, it’ll be fine. (Dying inside)”',
-    secretCode: '6666',
-    howWeMet: 'Enactus Menoufia',
-    bestMemory: 'Meeting Mahmoud Ezzat (life changed forever)'
-  },
-  {
-    id: '7',
-    name: 'Sarah',
-    nickname: 'Sarah',
-    bio: 'Girl who has always missed the gatherings but somehow still knows all the drama.',
-    secretCode: '7777',
-    howWeMet: 'Enactus Menoufia',
-    bestMemory: 'Meeting Mahmoud Ezzat (life changed forever)'
-  },
-  {
-    id: '8',
-    name: 'Noura',
-    nickname: 'Noura',
-    bio: 'Doctor by profession, superhero by responsibility, and the most trusted person for non-medical advice.',
-    secretCode: '8888',
-    howWeMet: 'Enactus Menoufia',
-    bestMemory: 'Meeting Mahmoud Ezzat (life changed forever)'
-  },
-  {
-    id: '9',
-    name: 'Nagham',
-    nickname: 'Nagham',
-    bio: 'The youngest, and somehow more mature than everyone else.',
-    secretCode: '9999',
-    howWeMet: 'Enactus Menoufia',
-    bestMemory: 'Meeting Mahmoud Ezzat (life changed forever)'
-  },
-  {
-    id: '10',
-    name: 'Norhan',
-    nickname: 'Norhan',
-    bio: 'Hardworking but also deeply caring—always there when you need support, advice, or a reality check.',
-    secretCode: '1010',
-    howWeMet: 'Enactus Menoufia',
-    bestMemory: 'Meeting Mahmoud Ezzat (life changed forever)'
-  }
+  { id: '1', name: 'Youssef', nickname: 'Youssef', bio: 'Living life one adventure at a time.', secretCode: '8312', howWeMet: 'The Gathering', bestMemory: 'The first meeting' },
+  { id: '2', name: 'Aml', nickname: 'Aml', bio: 'Sunshine and smiles.', secretCode: '4927', howWeMet: 'The Gathering', bestMemory: 'Every moment together' },
+  { id: '3', name: 'Ezzat', nickname: 'Ezzat', bio: 'The philosopher of the group.', secretCode: '3041', howWeMet: 'Enactus', bestMemory: 'Late night brainstorming' },
+  { id: '4', name: 'Noura', nickname: 'Noura', bio: 'Always helping, always there.', secretCode: '9582', howWeMet: 'Enactus', bestMemory: 'Helping others' },
+  { id: '5', name: 'Hamed', nickname: 'Hamed', bio: 'Master of organization.', secretCode: '1598', howWeMet: 'The Gang', bestMemory: 'Planning the trips' },
+  { id: '6', name: 'Nayera', nickname: 'Nayera', bio: 'The creative soul.', secretCode: '7264', howWeMet: 'The Gang', bestMemory: 'Art and laughter' },
+  { id: '7', name: 'Fatma', nickname: 'Fatma', bio: 'Calm and wise.', secretCode: '2176', howWeMet: 'University', bestMemory: 'The graduation day' },
+  { id: '8', name: 'Sarah', nickname: 'Sarah', bio: 'Always knows the latest news.', secretCode: '6835', howWeMet: 'Through friends', bestMemory: 'The big group ' },
+  { id: '9', name: 'Shahd', nickname: 'Shahd', bio: 'Trends and tech.', secretCode: '4419', howWeMet: 'Through friends', bestMemory: ' vibes' },
+  { id: '10', name: 'Ahmed', nickname: 'Ahmed', bio: 'Foodie and explorer.', secretCode: '5203', howWeMet: 'University', bestMemory: 'The trip' }
 ];
 
 /**
- * 2. SECRET SANTA ASSIGNMENTS (Configurable)
- * Giver ID buys for Receiver ID.
+ * 2. SECRET SANTA ASSIGNMENTS
+ * Engaged couples assigned to each other as requested:
+ * Youssef & Aml, Hamed & Nayera, Noura & Ezzat.
+ * Others randomized in a cycle.
  */
 export const HARDCODED_SANTA_MATCHES: SecretSantaMatch[] = [
-  { giverId: '1', receiverId: '1' },
-  { giverId: '2', receiverId: '2' },
-  { giverId: '3', receiverId: '3' },
-  { giverId: '4', receiverId: '4' },
-  { giverId: '5', receiverId: '5' },
-  { giverId: '6', receiverId: '6' },
-  { giverId: '7', receiverId: '7' },
-  { giverId: '8', receiverId: '8' },
-  { giverId: '9', receiverId: '9' },
-  { giverId: '10', receiverId: '10' },
+  // Engaged Couples (Mutual)
+  { giverId: '1', receiverId: '2' }, // Youssef -> Aml
+  { giverId: '2', receiverId: '1' }, // Aml -> Youssef
+  
+  { giverId: '5', receiverId: '6' }, // Hamed -> Nayera
+  { giverId: '6', receiverId: '5' }, // Nayera -> Hamed
+  
+  { giverId: '3', receiverId: '4' }, // Ezzat -> Noura
+  { giverId: '4', receiverId: '3' }, // Noura -> Ezzat
+
+  // Randomized Group (Fatma, Sarah, Shahd, Ahmed)
+  { giverId: '7', receiverId: '8' }, // Fatma -> Sarah
+  { giverId: '8', receiverId: '9' }, // Sarah -> Shahd
+  { giverId: '9', receiverId: '10' }, // Shahd -> Ahmed
+  { giverId: '10', receiverId: '7' }, // Ahmed -> Fatma
 ];
 
 /**
- * 3. SHARED PHOTO GALLERY (Configurable)
+ * 3. SHARED PHOTO GALLERY
  */
 export const HARDCODED_PHOTOS: Photo[] = [
   { 
@@ -146,37 +73,20 @@ export const HARDCODED_PHOTOS: Photo[] = [
 ];
 
 /**
- * 4. REUNION DATE (Configurable)
- * Set to Friday 1:30 PM CLT (Cairo Local Time is UTC+2)
- */
-export const REUNION_DATE = new Date('2025-02-28T13:30:00+02:00').getTime();
-
-/**
- * 5. MEMORY TIMELINE
+ * 4. MEMORY TIMELINE
+ * Fixes error: Module '"../constants"' has no exported member 'MEMORY_TIMELINE'.
  */
 export const MEMORY_TIMELINE: MemoryEntry[] = [
-  {
-    id: 'm1',
-    year: '2022',
-    title: 'The Enactus Era',
-    description: 'When we all met and spent way too much time in the club room working on projects and drinking tea.'
-  },
-  {
-    id: 'm2',
-    year: '2023',
-    title: 'Graduation & Beyond',
-    description: 'Promises to stay in touch as we entered the real world. The first scattering of the group.'
-  },
-  {
-    id: 'm3',
-    year: '2024',
-    title: 'The Silent Year',
-    description: 'Life got busy, careers started, but the group chat never truly died. Memories kept us together.'
-  },
-  {
-    id: 'm4',
-    year: '2025',
-    title: 'The Grand Reunion',
-    description: 'Two years later, and here we are. Still us, still gold. Ready to make new memories.'
-  }
+  { id: 'm1', year: '2019', title: 'The Beginning', description: 'Our first gathering at Enactus where the core group met.' },
+  { id: 'm2', year: '2020', title: 'Virtual Bond', description: 'Keeping the spirit alive through long Discord calls during lockdown.' },
+  { id: 'm3', year: '2021', title: 'Graduation', description: 'Celebrating our milestones together at the university.' },
+  { id: 'm4', year: '2022', title: 'The Last Big Trip', description: 'Our summer beach getaway before everyone started their careers.' },
+  { id: 'm5', year: '2023', title: 'Distance Calls', description: 'Checking in from different cities as we moved for work.' }
 ];
+
+/**
+ * 5. REUNION DATE
+ * Set to Friday 1:30 PM CLT (Cairo Local Time is UTC+2)
+ * Feb 28, 2025.
+ */
+export const REUNION_DATE = new Date('2025-02-28T13:30:00+02:00').getTime();
