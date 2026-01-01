@@ -64,7 +64,7 @@ export const DEFAULT_FRIENDS: Friend[] = [
     id: '7',
     name: 'Fatma',
     nickname: '7amamet el salam',
-    bio: 'Calm, peaceful, and smart—the human version of “don’t worry, it’ll be fine.”',
+    bio: 'Calm, peaceful, and smart—the human version of “don’t worry, it’ll be fine (Dead inside).”',
     secretCode: '2176',
     howWeMet: 'enactus',
     bestMemory: 'our meetings'
