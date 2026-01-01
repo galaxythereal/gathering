@@ -6,17 +6,98 @@ import { Friend, SecretSantaMatch, Photo, MemoryEntry } from './types';
  * 10 Friends with hard-to-guess random 4-digit codes.
  */
 export const DEFAULT_FRIENDS: Friend[] = [
-  { id: '1', name: 'Youssef', nickname: 'Youssef', bio: 'Living life one adventure at a time.', secretCode: '8312', howWeMet: 'The Gathering', bestMemory: 'The first meeting' },
-  { id: '2', name: 'Aml', nickname: 'Aml', bio: 'Sunshine and smiles.', secretCode: '4927', howWeMet: 'The Gathering', bestMemory: 'Every moment together' },
-  { id: '3', name: 'Ezzat', nickname: 'Ezzat', bio: 'The philosopher of the group.', secretCode: '3041', howWeMet: 'Enactus', bestMemory: 'Late night brainstorming' },
-  { id: '4', name: 'Noura', nickname: 'Noura', bio: 'Always helping, always there.', secretCode: '9582', howWeMet: 'Enactus', bestMemory: 'Helping others' },
-  { id: '5', name: 'Hamed', nickname: 'Hamed', bio: 'Master of organization.', secretCode: '1598', howWeMet: 'The Gang', bestMemory: 'Planning the trips' },
-  { id: '6', name: 'Nayera', nickname: 'Nayera', bio: 'The creative soul.', secretCode: '7264', howWeMet: 'The Gang', bestMemory: 'Art and laughter' },
-  { id: '7', name: 'Fatma', nickname: 'Fatma', bio: 'Calm and wise.', secretCode: '2176', howWeMet: 'University', bestMemory: 'The graduation day' },
-  { id: '8', name: 'Sarah', nickname: 'Sarah', bio: 'Always knows the latest news.', secretCode: '6835', howWeMet: 'Through friends', bestMemory: 'The big group ' },
-  { id: '9', name: 'Shahd', nickname: 'Shahd', bio: 'Trends and tech.', secretCode: '4419', howWeMet: 'Through friends', bestMemory: ' vibes' },
-  { id: '10', name: 'Ahmed', nickname: 'Ahmed', bio: 'Foodie and explorer.', secretCode: '5203', howWeMet: 'University', bestMemory: 'The trip' }
+  {
+    id: '1',
+    name: 'Youssef',
+    nickname: 'Youssef',
+    bio: 'Living life one adventure at a time.',
+    secretCode: '8312',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '2',
+    name: 'Aml',
+    nickname: 'Aml',
+    bio: 'Sunshine and smiles.',
+    secretCode: '4927',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '3',
+    name: 'Ezzat',
+    nickname: 'Ezzat',
+    bio: 'The guy who somehow ends up responsible for everything.',
+    secretCode: '3041',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '4',
+    name: 'Noura',
+    nickname: 'Noura',
+    bio: 'Doctor by profession, superhero by responsibility, and the most trusted person for medical advice.',
+    secretCode: '9582',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '5',
+    name: 'Hamed',
+    nickname: 'Hamed',
+    bio: 'Extremely reliable and hardworking—if Hamed says he’ll do it, consider it already done.',
+    secretCode: '1598',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '6',
+    name: 'Nayera',
+    nickname: 'Nayera',
+    bio: 'Quietly gets things done and somehow keeps the chaos under control.',
+    secretCode: '7264',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '7',
+    name: 'Fatma',
+    nickname: '7amamet el salam',
+    bio: 'Calm, peaceful, and smart—the human version of “don’t worry, it’ll be fine.”',
+    secretCode: '2176',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '8',
+    name: 'Sarah',
+    nickname: 'Sarah',
+    bio: 'The girl who is always missed at gatherings but somehow still knows all the drama.',
+    secretCode: '6835',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '9',
+    name: 'Shahd',
+    nickname: 'Shahd',
+    bio: 'The one that has an elite taste—always knows what’s trending before it’s trending.',
+    secretCode: '4419',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '10',
+    name: 'Ahmed',
+    nickname: 'Ahmed',
+    bio: 'Creative by nature, full of ideas, and always thinking in a way that surprises everyone.',
+    secretCode: '5203',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  }
 ];
+
 
 /**
  * 2. SECRET SANTA ASSIGNMENTS

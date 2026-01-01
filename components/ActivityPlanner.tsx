@@ -1,3 +1,95 @@
+export const DEFAULT_FRIENDS: Friend[] = [
+  {
+    id: '1',
+    name: 'Youssef',
+    nickname: 'Youssef',
+    bio: 'Living life one adventure at a time.',
+    secretCode: '8312',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '2',
+    name: 'Aml',
+    nickname: 'Aml',
+    bio: 'Sunshine and smiles.',
+    secretCode: '4927',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '3',
+    name: 'Ezzat',
+    nickname: 'Ezzat',
+    bio: 'Former Enactus president, computer engineer, and the guy who somehow ends up responsible for everything.',
+    secretCode: '3041',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '4',
+    name: 'Noura',
+    nickname: 'Noura',
+    bio: 'Doctor by profession, superhero by responsibility, and the most trusted person for medical advice.',
+    secretCode: '9582',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '5',
+    name: 'Hamed',
+    nickname: 'Hamed',
+    bio: 'Extremely reliable and hardworking—if Hamed says he’ll do it, consider it already done.',
+    secretCode: '1598',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '6',
+    name: 'Nayera',
+    nickname: 'Nayera',
+    bio: 'Quietly gets things done and somehow keeps the chaos under control.',
+    secretCode: '7264',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '7',
+    name: 'Fatma',
+    nickname: '7amamet el salam',
+    bio: 'Calm, peaceful, and smart—the human version of “don’t worry, it’ll be fine.”',
+    secretCode: '2176',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '8',
+    name: 'Sarah',
+    nickname: 'Sarah',
+    bio: 'Creative graphic designer who is always missed at gatherings but somehow still knows all the drama.',
+    secretCode: '6835',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '9',
+    name: 'Shahd',
+    nickname: 'Shahd',
+    bio: 'Fashion lover with elite taste—always knows what’s trending before it’s trending.',
+    secretCode: '4419',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  },
+  {
+    id: '10',
+    name: 'Ahmed',
+    nickname: 'Ahmed',
+    bio: 'Creative by nature, full of ideas, and always thinking in a way that surprises everyone.',
+    secretCode: '5203',
+    howWeMet: 'enactus',
+    bestMemory: 'our meetings'
+  }
+];
 
 import React, { useState } from 'react';
 import { Friend, ActivityIdea } from '../types';
